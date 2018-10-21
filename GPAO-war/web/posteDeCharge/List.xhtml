@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPosteDeChargeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPosteDeChargeEmpty}" rendered="#{posteDeChargeController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{posteDeChargeController.items.rowCount > 0}">
+                    <h:outputText value="#{posteDeChargeController.pagination.pageFirstItem + 1}..#{posteDeChargeController.pagination.pageLastItem + 1}/#{posteDeChargeController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{posteDeChargeController.previous}" value="#{bundle.Previous} #{posteDeChargeController.pagination.pageSize}" rendered="#{posteDeChargeController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{posteDeChargeController.next}" value="#{bundle.Next} #{posteDeChargeController.pagination.pageSize}" rendered="#{posteDeChargeController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{posteDeChargeController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPosteDeChargeTitle_posteDeChargePK_estMachine}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.posteDeChargePK.estMachine}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPosteDeChargeTitle_posteDeChargePK_numeroSousSection}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.posteDeChargePK.numeroSousSection}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPosteDeChargeTitle_posteDeChargePK_numeroSection}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.posteDeChargePK.numeroSection}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPosteDeChargeTitle_designation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.designation}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPosteDeChargeTitle_tauxHoraireOuForfait}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tauxHoraireOuForfait}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPosteDeChargeTitle_nombreDePostes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreDePostes}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPosteDeChargeTitle_capaciteNominale}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.capaciteNominale}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPosteDeChargeTitle_typeTauxHoraireOuForfait}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.typeTauxHoraireOuForfait}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{posteDeChargeController.prepareView}" value="#{bundle.ListPosteDeChargeViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{posteDeChargeController.prepareEdit}" value="#{bundle.ListPosteDeChargeEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{posteDeChargeController.destroy}" value="#{bundle.ListPosteDeChargeDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{posteDeChargeController.prepareCreate}" value="#{bundle.ListPosteDeChargeCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPosteDeChargeIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

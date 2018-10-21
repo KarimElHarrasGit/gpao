@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRemplacementTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRemplacementLabel_dateDeRemplacement}" for="dateDeRemplacement" />
+                    <h:inputText id="dateDeRemplacement" value="#{remplacementController.selected.dateDeRemplacement}" title="#{bundle.CreateRemplacementTitle_dateDeRemplacement}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_dateDeRemplacement}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateRemplacementLabel_lienDeNomenclature}" for="lienDeNomenclature" />
+                    <h:selectOneMenu id="lienDeNomenclature" value="#{remplacementController.selected.lienDeNomenclature}" title="#{bundle.CreateRemplacementTitle_lienDeNomenclature}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_lienDeNomenclature}">
+                        <f:selectItems value="#{lienDeNomenclatureController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateRemplacementLabel_lienDeNomenclature1}" for="lienDeNomenclature1" />
+                    <h:selectOneMenu id="lienDeNomenclature1" value="#{remplacementController.selected.lienDeNomenclature1}" title="#{bundle.CreateRemplacementTitle_lienDeNomenclature1}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_lienDeNomenclature1}">
+                        <f:selectItems value="#{lienDeNomenclatureController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{remplacementController.create}" value="#{bundle.CreateRemplacementSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{remplacementController.prepareList}" value="#{bundle.CreateRemplacementShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRemplacementIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

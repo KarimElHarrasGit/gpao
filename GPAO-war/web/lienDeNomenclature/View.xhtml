@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewLienDeNomenclatureTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewLienDeNomenclatureLabel_quantiteDeComposition}"/>
+                    <h:outputText value="#{lienDeNomenclatureController.selected.quantiteDeComposition}" title="#{bundle.ViewLienDeNomenclatureTitle_quantiteDeComposition}"/>
+                    <h:outputText value="#{bundle.ViewLienDeNomenclatureLabel_article}"/>
+                    <h:outputText value="#{lienDeNomenclatureController.selected.article}" title="#{bundle.ViewLienDeNomenclatureTitle_article}"/>
+                    <h:outputText value="#{bundle.ViewLienDeNomenclatureLabel_article1}"/>
+                    <h:outputText value="#{lienDeNomenclatureController.selected.article1}" title="#{bundle.ViewLienDeNomenclatureTitle_article1}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{lienDeNomenclatureController.destroyAndView}" value="#{bundle.ViewLienDeNomenclatureDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewLienDeNomenclatureEditLink}"/>
+                <br />
+                <h:commandLink action="#{lienDeNomenclatureController.prepareCreate}" value="#{bundle.ViewLienDeNomenclatureCreateLink}" />
+                <br />
+                <h:commandLink action="#{lienDeNomenclatureController.prepareList}" value="#{bundle.ViewLienDeNomenclatureShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewLienDeNomenclatureIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

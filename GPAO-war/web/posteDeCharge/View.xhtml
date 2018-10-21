@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPosteDeChargeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPosteDeChargeLabel_posteDeChargePK_estMachine}"/>
+                    <h:outputText value="#{posteDeChargeController.selected.posteDeChargePK.estMachine}" title="#{bundle.ViewPosteDeChargeTitle_posteDeChargePK_estMachine}"/>
+                    <h:outputText value="#{bundle.ViewPosteDeChargeLabel_posteDeChargePK_numeroSection}"/>
+                    <h:outputText value="#{posteDeChargeController.selected.posteDeChargePK.numeroSection}" title="#{bundle.ViewPosteDeChargeTitle_posteDeChargePK_numeroSection}"/>
+                    <h:outputText value="#{bundle.ViewPosteDeChargeLabel_posteDeChargePK_numeroSousSection}"/>
+                    <h:outputText value="#{posteDeChargeController.selected.posteDeChargePK.numeroSousSection}" title="#{bundle.ViewPosteDeChargeTitle_posteDeChargePK_numeroSousSection}"/>
+                    <h:outputText value="#{bundle.ViewPosteDeChargeLabel_designation}"/>
+                    <h:outputText value="#{posteDeChargeController.selected.designation}" title="#{bundle.ViewPosteDeChargeTitle_designation}"/>
+                    <h:outputText value="#{bundle.ViewPosteDeChargeLabel_tauxHoraireOuForfait}"/>
+                    <h:outputText value="#{posteDeChargeController.selected.tauxHoraireOuForfait}" title="#{bundle.ViewPosteDeChargeTitle_tauxHoraireOuForfait}"/>
+                    <h:outputText value="#{bundle.ViewPosteDeChargeLabel_nombreDePostes}"/>
+                    <h:outputText value="#{posteDeChargeController.selected.nombreDePostes}" title="#{bundle.ViewPosteDeChargeTitle_nombreDePostes}"/>
+                    <h:outputText value="#{bundle.ViewPosteDeChargeLabel_capaciteNominale}"/>
+                    <h:outputText value="#{posteDeChargeController.selected.capaciteNominale}" title="#{bundle.ViewPosteDeChargeTitle_capaciteNominale}"/>
+                    <h:outputText value="#{bundle.ViewPosteDeChargeLabel_typeTauxHoraireOuForfait}"/>
+                    <h:outputText value="#{posteDeChargeController.selected.typeTauxHoraireOuForfait}" title="#{bundle.ViewPosteDeChargeTitle_typeTauxHoraireOuForfait}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{posteDeChargeController.destroyAndView}" value="#{bundle.ViewPosteDeChargeDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPosteDeChargeEditLink}"/>
+                <br />
+                <h:commandLink action="#{posteDeChargeController.prepareCreate}" value="#{bundle.ViewPosteDeChargeCreateLink}" />
+                <br />
+                <h:commandLink action="#{posteDeChargeController.prepareList}" value="#{bundle.ViewPosteDeChargeShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPosteDeChargeIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

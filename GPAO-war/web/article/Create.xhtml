@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateArticleTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_reference}" for="reference" />
+                    <h:inputText id="reference" value="#{articleController.selected.reference}" title="#{bundle.CreateArticleTitle_reference}" required="true" requiredMessage="#{bundle.CreateArticleRequiredMessage_reference}"/>
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_designation}" for="designation" />
+                    <h:inputText id="designation" value="#{articleController.selected.designation}" title="#{bundle.CreateArticleTitle_designation}" required="true" requiredMessage="#{bundle.CreateArticleRequiredMessage_designation}"/>
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_typeFabricationAchat}" for="typeFabricationAchat" />
+                    <h:inputText id="typeFabricationAchat" value="#{articleController.selected.typeFabricationAchat}" title="#{bundle.CreateArticleTitle_typeFabricationAchat}" required="true" requiredMessage="#{bundle.CreateArticleRequiredMessage_typeFabricationAchat}"/>
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_uniteAchatStock}" for="uniteAchatStock" />
+                    <h:inputText id="uniteAchatStock" value="#{articleController.selected.uniteAchatStock}" title="#{bundle.CreateArticleTitle_uniteAchatStock}" required="true" requiredMessage="#{bundle.CreateArticleRequiredMessage_uniteAchatStock}"/>
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_delaiEnSemaine}" for="delaiEnSemaine" />
+                    <h:inputText id="delaiEnSemaine" value="#{articleController.selected.delaiEnSemaine}" title="#{bundle.CreateArticleTitle_delaiEnSemaine}" required="true" requiredMessage="#{bundle.CreateArticleRequiredMessage_delaiEnSemaine}"/>
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_prixStandard}" for="prixStandard" />
+                    <h:inputText id="prixStandard" value="#{articleController.selected.prixStandard}" title="#{bundle.CreateArticleTitle_prixStandard}" />
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_lotDeReapprovisionnement}" for="lotDeReapprovisionnement" />
+                    <h:inputText id="lotDeReapprovisionnement" value="#{articleController.selected.lotDeReapprovisionnement}" title="#{bundle.CreateArticleTitle_lotDeReapprovisionnement}" />
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_stockMini}" for="stockMini" />
+                    <h:inputText id="stockMini" value="#{articleController.selected.stockMini}" title="#{bundle.CreateArticleTitle_stockMini}" />
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_stockMaxi}" for="stockMaxi" />
+                    <h:inputText id="stockMaxi" value="#{articleController.selected.stockMaxi}" title="#{bundle.CreateArticleTitle_stockMaxi}" />
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_pourcentageDePerte}" for="pourcentageDePerte" />
+                    <h:inputText id="pourcentageDePerte" value="#{articleController.selected.pourcentageDePerte}" title="#{bundle.CreateArticleTitle_pourcentageDePerte}" />
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_inventaire}" for="inventaire" />
+                    <h:inputText id="inventaire" value="#{articleController.selected.inventaire}" title="#{bundle.CreateArticleTitle_inventaire}" />
+                    <h:outputLabel value="#{bundle.CreateArticleLabel_pfOuMpOuPieceOuSe}" for="pfOuMpOuPieceOuSe" />
+                    <h:inputText id="pfOuMpOuPieceOuSe" value="#{articleController.selected.pfOuMpOuPieceOuSe}" title="#{bundle.CreateArticleTitle_pfOuMpOuPieceOuSe}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{articleController.create}" value="#{bundle.CreateArticleSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{articleController.prepareList}" value="#{bundle.CreateArticleShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateArticleIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

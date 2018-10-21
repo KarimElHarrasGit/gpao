@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditArticleTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditArticleLabel_reference}" for="reference" />
+                    <h:inputText id="reference" value="#{articleController.selected.reference}" title="#{bundle.EditArticleTitle_reference}" required="true" requiredMessage="#{bundle.EditArticleRequiredMessage_reference}"/>
+                    <h:outputLabel value="#{bundle.EditArticleLabel_designation}" for="designation" />
+                    <h:inputText id="designation" value="#{articleController.selected.designation}" title="#{bundle.EditArticleTitle_designation}" required="true" requiredMessage="#{bundle.EditArticleRequiredMessage_designation}"/>
+                    <h:outputLabel value="#{bundle.EditArticleLabel_typeFabricationAchat}" for="typeFabricationAchat" />
+                    <h:inputText id="typeFabricationAchat" value="#{articleController.selected.typeFabricationAchat}" title="#{bundle.EditArticleTitle_typeFabricationAchat}" required="true" requiredMessage="#{bundle.EditArticleRequiredMessage_typeFabricationAchat}"/>
+                    <h:outputLabel value="#{bundle.EditArticleLabel_uniteAchatStock}" for="uniteAchatStock" />
+                    <h:inputText id="uniteAchatStock" value="#{articleController.selected.uniteAchatStock}" title="#{bundle.EditArticleTitle_uniteAchatStock}" required="true" requiredMessage="#{bundle.EditArticleRequiredMessage_uniteAchatStock}"/>
+                    <h:outputLabel value="#{bundle.EditArticleLabel_delaiEnSemaine}" for="delaiEnSemaine" />
+                    <h:inputText id="delaiEnSemaine" value="#{articleController.selected.delaiEnSemaine}" title="#{bundle.EditArticleTitle_delaiEnSemaine}" required="true" requiredMessage="#{bundle.EditArticleRequiredMessage_delaiEnSemaine}"/>
+                    <h:outputLabel value="#{bundle.EditArticleLabel_prixStandard}" for="prixStandard" />
+                    <h:inputText id="prixStandard" value="#{articleController.selected.prixStandard}" title="#{bundle.EditArticleTitle_prixStandard}" />
+                    <h:outputLabel value="#{bundle.EditArticleLabel_lotDeReapprovisionnement}" for="lotDeReapprovisionnement" />
+                    <h:inputText id="lotDeReapprovisionnement" value="#{articleController.selected.lotDeReapprovisionnement}" title="#{bundle.EditArticleTitle_lotDeReapprovisionnement}" />
+                    <h:outputLabel value="#{bundle.EditArticleLabel_stockMini}" for="stockMini" />
+                    <h:inputText id="stockMini" value="#{articleController.selected.stockMini}" title="#{bundle.EditArticleTitle_stockMini}" />
+                    <h:outputLabel value="#{bundle.EditArticleLabel_stockMaxi}" for="stockMaxi" />
+                    <h:inputText id="stockMaxi" value="#{articleController.selected.stockMaxi}" title="#{bundle.EditArticleTitle_stockMaxi}" />
+                    <h:outputLabel value="#{bundle.EditArticleLabel_pourcentageDePerte}" for="pourcentageDePerte" />
+                    <h:inputText id="pourcentageDePerte" value="#{articleController.selected.pourcentageDePerte}" title="#{bundle.EditArticleTitle_pourcentageDePerte}" />
+                    <h:outputLabel value="#{bundle.EditArticleLabel_inventaire}" for="inventaire" />
+                    <h:inputText id="inventaire" value="#{articleController.selected.inventaire}" title="#{bundle.EditArticleTitle_inventaire}" />
+                    <h:outputLabel value="#{bundle.EditArticleLabel_pfOuMpOuPieceOuSe}" for="pfOuMpOuPieceOuSe" />
+                    <h:inputText id="pfOuMpOuPieceOuSe" value="#{articleController.selected.pfOuMpOuPieceOuSe}" title="#{bundle.EditArticleTitle_pfOuMpOuPieceOuSe}" />
+                </h:panelGrid>
+                <h:commandLink action="#{articleController.update}" value="#{bundle.EditArticleSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditArticleViewLink}"/>
+                <br />
+                <h:commandLink action="#{articleController.prepareList}" value="#{bundle.EditArticleShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditArticleIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
