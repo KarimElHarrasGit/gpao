@@ -90,10 +90,10 @@ public class Article implements Serializable {
     private Collection<MouvementDeStock> mouvementDeStockCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "article")
     private Collection<Operation> operationCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "article")
-    private Collection<LienDeNomenclature> lienDeNomenclatureCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "article1")
-    private Collection<LienDeNomenclature> lienDeNomenclatureCollection1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "composant")
+    private Collection<LienDeNomenclature> lienDeNomenclatureCollectionComposant;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compose")
+    private Collection<LienDeNomenclature> lienDeNomenclatureCollectionCompose;
 
     public Article() {
     }
@@ -225,22 +225,24 @@ public class Article implements Serializable {
     }
 
     @XmlTransient
-    public Collection<LienDeNomenclature> getLienDeNomenclatureCollection() {
-        return lienDeNomenclatureCollection;
+    public Collection<LienDeNomenclature> getLienDeNomenclatureCollectionComposant() {
+        return lienDeNomenclatureCollectionComposant;
     }
 
-    public void setLienDeNomenclatureCollection(Collection<LienDeNomenclature> lienDeNomenclatureCollection) {
-        this.lienDeNomenclatureCollection = lienDeNomenclatureCollection;
+    public void setLienDeNomenclatureCollectionComposant(Collection<LienDeNomenclature> lienDeNomenclatureCollectionComposant) {
+        this.lienDeNomenclatureCollectionComposant = lienDeNomenclatureCollectionComposant;
     }
 
     @XmlTransient
-    public Collection<LienDeNomenclature> getLienDeNomenclatureCollection1() {
-        return lienDeNomenclatureCollection1;
+    public Collection<LienDeNomenclature> getLienDeNomenclatureCollectionCompose() {
+        return lienDeNomenclatureCollectionCompose;
     }
 
-    public void setLienDeNomenclatureCollection1(Collection<LienDeNomenclature> lienDeNomenclatureCollection1) {
-        this.lienDeNomenclatureCollection1 = lienDeNomenclatureCollection1;
+    public void setLienDeNomenclatureCollectionCompose(Collection<LienDeNomenclature> lienDeNomenclatureCollectionCompose) {
+        this.lienDeNomenclatureCollectionCompose = lienDeNomenclatureCollectionCompose;
     }
+
+    
 
     @Override
     public int hashCode() {
@@ -264,7 +266,7 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.Article[ reference=" + reference + " ]";
+        return reference;
     }
     
 }

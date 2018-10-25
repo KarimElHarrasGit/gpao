@@ -15,16 +15,16 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditLienDeNomenclatureLabel_compose}" for="compose" />
+                    <h:selectOneMenu id="compose" value="#{lienDeNomenclatureController.selected.compose}" title="#{bundle.EditLienDeNomenclatureTitle_compose}" required="true" requiredMessage="#{bundle.EditLienDeNomenclatureRequiredMessage_compose}">
+                        <f:selectItems value="#{articleController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditLienDeNomenclatureLabel_composant}" for="composant" />
+                    <h:selectOneMenu id="composant" value="#{lienDeNomenclatureController.selected.composant}" title="#{bundle.EditLienDeNomenclatureTitle_composant}" required="true" requiredMessage="#{bundle.EditLienDeNomenclatureRequiredMessage_composant}">
+                        <f:selectItems value="#{articleController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditLienDeNomenclatureLabel_quantiteDeComposition}" for="quantiteDeComposition" />
                     <h:inputText id="quantiteDeComposition" value="#{lienDeNomenclatureController.selected.quantiteDeComposition}" title="#{bundle.EditLienDeNomenclatureTitle_quantiteDeComposition}" required="true" requiredMessage="#{bundle.EditLienDeNomenclatureRequiredMessage_quantiteDeComposition}"/>
-                    <h:outputLabel value="#{bundle.EditLienDeNomenclatureLabel_article}" for="article" />
-                    <h:selectOneMenu id="article" value="#{lienDeNomenclatureController.selected.article}" title="#{bundle.EditLienDeNomenclatureTitle_article}" required="true" requiredMessage="#{bundle.EditLienDeNomenclatureRequiredMessage_article}">
-                        <f:selectItems value="#{articleController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditLienDeNomenclatureLabel_article1}" for="article1" />
-                    <h:selectOneMenu id="article1" value="#{lienDeNomenclatureController.selected.article1}" title="#{bundle.EditLienDeNomenclatureTitle_article1}" required="true" requiredMessage="#{bundle.EditLienDeNomenclatureRequiredMessage_article1}">
-                        <f:selectItems value="#{articleController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{lienDeNomenclatureController.update}" value="#{bundle.EditLienDeNomenclatureSaveLink}"/>
                 <br />

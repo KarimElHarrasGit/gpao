@@ -22,21 +22,21 @@
                     <h:dataTable value="#{lienDeNomenclatureController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLienDeNomenclatureTitle_compose}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.compose}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLienDeNomenclatureTitle_composant}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.composant}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListLienDeNomenclatureTitle_quantiteDeComposition}"/>
                             </f:facet>
                             <h:outputText value="#{item.quantiteDeComposition}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLienDeNomenclatureTitle_article}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.article}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLienDeNomenclatureTitle_article1}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.article1}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

@@ -49,10 +49,10 @@ public class LienDeNomenclature implements Serializable {
     private Collection<Remplacement> remplacementCollection1;
     @JoinColumn(name = "COMPOSANT", referencedColumnName = "REFERENCE", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Article article;
+    private Article composant;
     @JoinColumn(name = "COMPOSE", referencedColumnName = "REFERENCE", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Article article1;
+    private Article compose;
 
     public LienDeNomenclature() {
     }
@@ -104,21 +104,23 @@ public class LienDeNomenclature implements Serializable {
         this.remplacementCollection1 = remplacementCollection1;
     }
 
-    public Article getArticle() {
-        return article;
+    public Article getComposant() {
+        return composant;
     }
 
-    public void setArticle(Article article) {
-        this.article = article;
+    public void setComposant(Article composant) {
+        this.composant = composant;
     }
 
-    public Article getArticle1() {
-        return article1;
+    public Article getCompose() {
+        return compose;
     }
 
-    public void setArticle1(Article article1) {
-        this.article1 = article1;
+    public void setCompose(Article compose) {
+        this.compose = compose;
     }
+
+    
 
     @Override
     public int hashCode() {

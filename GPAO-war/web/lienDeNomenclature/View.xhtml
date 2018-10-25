@@ -15,12 +15,12 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewLienDeNomenclatureLabel_compose}"/>
+                    <h:outputText value="#{lienDeNomenclatureController.selected.compose}" title="#{bundle.ViewLienDeNomenclatureTitle_compose}"/>
+                    <h:outputText value="#{bundle.ViewLienDeNomenclatureLabel_composant}"/>
+                    <h:outputText value="#{lienDeNomenclatureController.selected.composant}" title="#{bundle.ViewLienDeNomenclatureTitle_composant}"/>
                     <h:outputText value="#{bundle.ViewLienDeNomenclatureLabel_quantiteDeComposition}"/>
                     <h:outputText value="#{lienDeNomenclatureController.selected.quantiteDeComposition}" title="#{bundle.ViewLienDeNomenclatureTitle_quantiteDeComposition}"/>
-                    <h:outputText value="#{bundle.ViewLienDeNomenclatureLabel_article}"/>
-                    <h:outputText value="#{lienDeNomenclatureController.selected.article}" title="#{bundle.ViewLienDeNomenclatureTitle_article}"/>
-                    <h:outputText value="#{bundle.ViewLienDeNomenclatureLabel_article1}"/>
-                    <h:outputText value="#{lienDeNomenclatureController.selected.article1}" title="#{bundle.ViewLienDeNomenclatureTitle_article1}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{lienDeNomenclatureController.destroyAndView}" value="#{bundle.ViewLienDeNomenclatureDestroyLink}"/>

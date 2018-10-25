@@ -16,6 +16,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import service.ManageLienDeNomenclature;
 
 @Named("lienDeNomenclatureController")
 @SessionScoped
@@ -24,7 +25,7 @@ public class LienDeNomenclatureController implements Serializable {
     private LienDeNomenclature current;
     private DataModel items = null;
     @EJB
-    private presentation.LienDeNomenclatureFacade ejbFacade;
+    private ManageLienDeNomenclature manageLienDeNomenclature;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,9 +41,7 @@ public class LienDeNomenclatureController implements Serializable {
         return current;
     }
 
-    private LienDeNomenclatureFacade getFacade() {
-        return ejbFacade;
-    }
+    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -50,12 +49,12 @@ public class LienDeNomenclatureController implements Serializable {
 
                 @Override
                 public int getItemsCount() {
-                    return getFacade().count();
+                    return manageLienDeNomenclature.count();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(manageLienDeNomenclature.findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -82,9 +81,9 @@ public class LienDeNomenclatureController implements Serializable {
 
     public String create() {
         try {
-            current.getLienDeNomenclaturePK().setCompose(current.getArticle1().getReference());
-            current.getLienDeNomenclaturePK().setComposant(current.getArticle().getReference());
-            getFacade().create(current);
+            current.getLienDeNomenclaturePK().setComposant(current.getComposant().getReference());
+            current.getLienDeNomenclaturePK().setCompose(current.getCompose().getReference());
+            manageLienDeNomenclature.create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("LienDeNomenclatureCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -101,9 +100,9 @@ public class LienDeNomenclatureController implements Serializable {
 
     public String update() {
         try {
-            current.getLienDeNomenclaturePK().setCompose(current.getArticle1().getReference());
-            current.getLienDeNomenclaturePK().setComposant(current.getArticle().getReference());
-            getFacade().edit(current);
+            current.getLienDeNomenclaturePK().setComposant(current.getComposant().getReference());
+            current.getLienDeNomenclaturePK().setCompose(current.getCompose().getReference());
+            manageLienDeNomenclature.edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("LienDeNomenclatureUpdated"));
             return "View";
         } catch (Exception e) {
@@ -136,7 +135,7 @@ public class LienDeNomenclatureController implements Serializable {
 
     private void performDestroy() {
         try {
-            getFacade().remove(current);
+            manageLienDeNomenclature.remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("LienDeNomenclatureDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/presentation/Bundle").getString("PersistenceErrorOccured"));
@@ -144,7 +143,7 @@ public class LienDeNomenclatureController implements Serializable {
     }
 
     private void updateCurrentItem() {
-        int count = getFacade().count();
+        int count = manageLienDeNomenclature.count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -154,7 +153,7 @@ public class LienDeNomenclatureController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = manageLienDeNomenclature.findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -186,15 +185,15 @@ public class LienDeNomenclatureController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(manageLienDeNomenclature.findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(manageLienDeNomenclature.findAll(), true);
     }
 
     public LienDeNomenclature getLienDeNomenclature(persistence.LienDeNomenclaturePK id) {
-        return ejbFacade.find(id);
+        return manageLienDeNomenclature.find(id);
     }
 
     @FacesConverter(forClass = LienDeNomenclature.class)

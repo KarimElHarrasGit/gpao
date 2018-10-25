@@ -82,10 +82,10 @@ public class RemplacementController implements Serializable {
 
     public String create() {
         try {
-            current.getRemplacementPK().setRemplacantComposant(current.getLienDeNomenclature().getLienDeNomenclaturePK().getComposant());
-            current.getRemplacementPK().setRemplaceCompose(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getCompose());
             current.getRemplacementPK().setRemplaceComposant(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getComposant());
             current.getRemplacementPK().setRemplacantCompose(current.getLienDeNomenclature().getLienDeNomenclaturePK().getCompose());
+            current.getRemplacementPK().setRemplacantComposant(current.getLienDeNomenclature().getLienDeNomenclaturePK().getComposant());
+            current.getRemplacementPK().setRemplaceCompose(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getCompose());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("RemplacementCreated"));
             return prepareCreate();
@@ -103,10 +103,10 @@ public class RemplacementController implements Serializable {
 
     public String update() {
         try {
-            current.getRemplacementPK().setRemplacantComposant(current.getLienDeNomenclature().getLienDeNomenclaturePK().getComposant());
-            current.getRemplacementPK().setRemplaceCompose(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getCompose());
             current.getRemplacementPK().setRemplaceComposant(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getComposant());
             current.getRemplacementPK().setRemplacantCompose(current.getLienDeNomenclature().getLienDeNomenclaturePK().getCompose());
+            current.getRemplacementPK().setRemplacantComposant(current.getLienDeNomenclature().getLienDeNomenclaturePK().getComposant());
+            current.getRemplacementPK().setRemplaceCompose(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getCompose());
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("RemplacementUpdated"));
             return "View";
