@@ -16,6 +16,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import service.ManageRemplacement;
 
 @Named("remplacementController")
 @SessionScoped
@@ -24,7 +25,7 @@ public class RemplacementController implements Serializable {
     private Remplacement current;
     private DataModel items = null;
     @EJB
-    private presentation.RemplacementFacade ejbFacade;
+    private ManageRemplacement manageRemplacement;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,22 +41,18 @@ public class RemplacementController implements Serializable {
         return current;
     }
 
-    private RemplacementFacade getFacade() {
-        return ejbFacade;
-    }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
                 @Override
                 public int getItemsCount() {
-                    return getFacade().count();
+                    return manageRemplacement.count();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(manageRemplacement.findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -82,11 +79,11 @@ public class RemplacementController implements Serializable {
 
     public String create() {
         try {
-            current.getRemplacementPK().setRemplaceComposant(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getComposant());
-            current.getRemplacementPK().setRemplacantCompose(current.getLienDeNomenclature().getLienDeNomenclaturePK().getCompose());
-            current.getRemplacementPK().setRemplacantComposant(current.getLienDeNomenclature().getLienDeNomenclaturePK().getComposant());
-            current.getRemplacementPK().setRemplaceCompose(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getCompose());
-            getFacade().create(current);
+            current.getRemplacementPK().setRemplaceComposant(current.getRemplace().getLienDeNomenclaturePK().getComposant());
+            current.getRemplacementPK().setRemplacantComposant(current.getRemplacant().getLienDeNomenclaturePK().getComposant());
+            current.getRemplacementPK().setRemplaceCompose(current.getRemplace().getLienDeNomenclaturePK().getCompose());
+            current.getRemplacementPK().setRemplacantCompose(current.getRemplacant().getLienDeNomenclaturePK().getCompose());
+            manageRemplacement.create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("RemplacementCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -103,11 +100,11 @@ public class RemplacementController implements Serializable {
 
     public String update() {
         try {
-            current.getRemplacementPK().setRemplaceComposant(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getComposant());
-            current.getRemplacementPK().setRemplacantCompose(current.getLienDeNomenclature().getLienDeNomenclaturePK().getCompose());
-            current.getRemplacementPK().setRemplacantComposant(current.getLienDeNomenclature().getLienDeNomenclaturePK().getComposant());
-            current.getRemplacementPK().setRemplaceCompose(current.getLienDeNomenclature1().getLienDeNomenclaturePK().getCompose());
-            getFacade().edit(current);
+            current.getRemplacementPK().setRemplaceComposant(current.getRemplace().getLienDeNomenclaturePK().getComposant());
+            current.getRemplacementPK().setRemplacantComposant(current.getRemplacant().getLienDeNomenclaturePK().getComposant());
+            current.getRemplacementPK().setRemplaceCompose(current.getRemplace().getLienDeNomenclaturePK().getCompose());
+            current.getRemplacementPK().setRemplacantCompose(current.getRemplacant().getLienDeNomenclaturePK().getCompose());
+            manageRemplacement.edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("RemplacementUpdated"));
             return "View";
         } catch (Exception e) {
@@ -140,7 +137,7 @@ public class RemplacementController implements Serializable {
 
     private void performDestroy() {
         try {
-            getFacade().remove(current);
+            manageRemplacement.remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("RemplacementDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/presentation/Bundle").getString("PersistenceErrorOccured"));
@@ -148,7 +145,7 @@ public class RemplacementController implements Serializable {
     }
 
     private void updateCurrentItem() {
-        int count = getFacade().count();
+        int count = manageRemplacement.count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -158,7 +155,7 @@ public class RemplacementController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = manageRemplacement.findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -190,15 +187,15 @@ public class RemplacementController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(manageRemplacement.findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(manageRemplacement.findAll(), true);
     }
 
     public Remplacement getRemplacement(persistence.RemplacementPK id) {
-        return ejbFacade.find(id);
+        return manageRemplacement.find(id);
     }
 
     @FacesConverter(forClass = Remplacement.class)

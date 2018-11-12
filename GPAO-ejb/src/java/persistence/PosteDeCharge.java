@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -61,12 +63,12 @@ public class PosteDeCharge implements Serializable {
     private int capaciteNominale;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "TYPE_TAUX_HORAIRE_OU_FORFAIT")
-    private String typeTauxHoraireOuForfait;
-    @OneToMany(mappedBy = "posteDeCharge")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TYPE_TAUX_HORAIRE_OU_FORFAIT", length = 2)
+    private TypeTauxHoraireOuForfait typeTauxHoraireOuForfait;
+    @OneToMany(mappedBy = "mainDOeuvre")
     private Collection<Operation> operationCollection;
-    @OneToMany(mappedBy = "posteDeCharge1")
+    @OneToMany(mappedBy = "machine")
     private Collection<Operation> operationCollection1;
 
     public PosteDeCharge() {
@@ -76,7 +78,7 @@ public class PosteDeCharge implements Serializable {
         this.posteDeChargePK = posteDeChargePK;
     }
 
-    public PosteDeCharge(PosteDeChargePK posteDeChargePK, String designation, int tauxHoraireOuForfait, int nombreDePostes, int capaciteNominale, String typeTauxHoraireOuForfait) {
+    public PosteDeCharge(PosteDeChargePK posteDeChargePK, String designation, int tauxHoraireOuForfait, int nombreDePostes, int capaciteNominale, TypeTauxHoraireOuForfait typeTauxHoraireOuForfait) {
         this.posteDeChargePK = posteDeChargePK;
         this.designation = designation;
         this.tauxHoraireOuForfait = tauxHoraireOuForfait;
@@ -85,7 +87,7 @@ public class PosteDeCharge implements Serializable {
         this.typeTauxHoraireOuForfait = typeTauxHoraireOuForfait;
     }
 
-    public PosteDeCharge(int numeroSection, int numeroSousSection, short estMachine) {
+    public PosteDeCharge(int numeroSection, int numeroSousSection, boolean estMachine) {
         this.posteDeChargePK = new PosteDeChargePK(numeroSection, numeroSousSection, estMachine);
     }
 
@@ -129,11 +131,11 @@ public class PosteDeCharge implements Serializable {
         this.capaciteNominale = capaciteNominale;
     }
 
-    public String getTypeTauxHoraireOuForfait() {
+    public TypeTauxHoraireOuForfait getTypeTauxHoraireOuForfait() {
         return typeTauxHoraireOuForfait;
     }
 
-    public void setTypeTauxHoraireOuForfait(String typeTauxHoraireOuForfait) {
+    public void setTypeTauxHoraireOuForfait(TypeTauxHoraireOuForfait typeTauxHoraireOuForfait) {
         this.typeTauxHoraireOuForfait = typeTauxHoraireOuForfait;
     }
 
@@ -177,7 +179,7 @@ public class PosteDeCharge implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.PosteDeCharge[ posteDeChargePK=" + posteDeChargePK + " ]";
+        return posteDeChargePK.toString();
     }
-    
+
 }

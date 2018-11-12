@@ -50,12 +50,12 @@ public class Remplacement implements Serializable {
         @JoinColumn(name = "REMPLACANT_COMPOSE", referencedColumnName = "COMPOSE", insertable = false, updatable = false)
         , @JoinColumn(name = "REMPLACANT_COMPOSANT", referencedColumnName = "COMPOSANT", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-    private LienDeNomenclature lienDeNomenclature;
+    private LienDeNomenclature remplacant;
     @JoinColumns({
         @JoinColumn(name = "REMPLACE_COMPOSE", referencedColumnName = "COMPOSE", insertable = false, updatable = false)
         , @JoinColumn(name = "REMPLACE_COMPOSANT", referencedColumnName = "COMPOSANT", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-    private LienDeNomenclature lienDeNomenclature1;
+    private LienDeNomenclature remplace;
 
     public Remplacement() {
     }
@@ -81,28 +81,28 @@ public class Remplacement implements Serializable {
         this.remplacementPK = remplacementPK;
     }
 
+    public LienDeNomenclature getRemplace() {
+        return remplace;
+    }
+
+    public void setRemplace(LienDeNomenclature remplace) {
+        this.remplace = remplace;
+    }
+
+    public LienDeNomenclature getRemplacant() {
+        return remplacant;
+    }
+
+    public void setRemplacant(LienDeNomenclature remplacant) {
+        this.remplacant = remplacant;
+    }
+
     public Date getDateDeRemplacement() {
         return dateDeRemplacement;
     }
 
     public void setDateDeRemplacement(Date dateDeRemplacement) {
         this.dateDeRemplacement = dateDeRemplacement;
-    }
-
-    public LienDeNomenclature getLienDeNomenclature() {
-        return lienDeNomenclature;
-    }
-
-    public void setLienDeNomenclature(LienDeNomenclature lienDeNomenclature) {
-        this.lienDeNomenclature = lienDeNomenclature;
-    }
-
-    public LienDeNomenclature getLienDeNomenclature1() {
-        return lienDeNomenclature1;
-    }
-
-    public void setLienDeNomenclature1(LienDeNomenclature lienDeNomenclature1) {
-        this.lienDeNomenclature1 = lienDeNomenclature1;
     }
 
     @Override
@@ -129,5 +129,5 @@ public class Remplacement implements Serializable {
     public String toString() {
         return "persistence.Remplacement[ remplacementPK=" + remplacementPK + " ]";
     }
-    
+
 }

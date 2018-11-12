@@ -38,7 +38,10 @@
                     <h:outputLabel value="#{bundle.CreateArticleLabel_inventaire}" for="inventaire" />
                     <h:inputText id="inventaire" value="#{articleController.selected.inventaire}" title="#{bundle.CreateArticleTitle_inventaire}" />
                     <h:outputLabel value="#{bundle.CreateArticleLabel_pfOuMpOuPieceOuSe}" for="pfOuMpOuPieceOuSe" />
-                    <h:inputText id="pfOuMpOuPieceOuSe" value="#{articleController.selected.pfOuMpOuPieceOuSe}" title="#{bundle.CreateArticleTitle_pfOuMpOuPieceOuSe}" />
+                    <h:selectOneMenu id="pfOuMpOuPieceOuSe" value="#{articleController.selected.pfOuMpOuPieceOuSe}" title="#{bundle.CreateArticleTitle_pfOuMpOuPieceOuSe}">
+                        <f:selectItem itemValue="---" itemLabel="---" />
+                        <f:selectItems value="#{articleController.typeArticle}" />
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{articleController.create}" value="#{bundle.CreateArticleSaveLink}" />

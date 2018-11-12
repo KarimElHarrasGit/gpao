@@ -29,12 +29,12 @@ public class PosteDeChargePK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "EST_MACHINE")
-    private short estMachine;
+    private boolean estMachine;
 
     public PosteDeChargePK() {
     }
 
-    public PosteDeChargePK(int numeroSection, int numeroSousSection, short estMachine) {
+    public PosteDeChargePK(int numeroSection, int numeroSousSection, boolean estMachine) {
         this.numeroSection = numeroSection;
         this.numeroSousSection = numeroSousSection;
         this.estMachine = estMachine;
@@ -56,22 +56,26 @@ public class PosteDeChargePK implements Serializable {
         this.numeroSousSection = numeroSousSection;
     }
 
-    public short getEstMachine() {
+    public boolean isEstMachine() {
         return estMachine;
     }
 
-    public void setEstMachine(short estMachine) {
+    public void setEstMachine(boolean estMachine) {
         this.estMachine = estMachine;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (int) numeroSection;
-        hash += (int) numeroSousSection;
-        hash += (int) estMachine;
+        int hash = 7;
+        hash = 41 * hash + this.numeroSection;
+        hash = 41 * hash + this.numeroSousSection;
+        hash = 41 * hash + (this.estMachine ? 1 : 0);
         return hash;
     }
+
+    
+
+    
 
     @Override
     public boolean equals(Object object) {
@@ -94,7 +98,7 @@ public class PosteDeChargePK implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.PosteDeChargePK[ numeroSection=" + numeroSection + ", numeroSousSection=" + numeroSousSection + ", estMachine=" + estMachine + " ]";
+        return "numeroSection=" + numeroSection + ", numeroSousSection=" + numeroSousSection;
     }
     
 }

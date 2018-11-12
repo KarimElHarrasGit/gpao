@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -15,18 +16,18 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRemplacementLabel_remplace}" for="remplace" />
+                    <h:selectOneMenu id="remplace" value="#{remplacementController.selected.remplace}" title="#{bundle.CreateRemplacementTitle_remplace}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_remplace}">
+                        <f:selectItems value="#{lienDeNomenclatureController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateRemplacementLabel_remplacant}" for="remplacant" />
+                    <h:selectOneMenu id="remplacant" value="#{remplacementController.selected.remplacant}" title="#{bundle.CreateRemplacementTitle_remplacant}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_remplacant}">
+                        <f:selectItems value="#{lienDeNomenclatureController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.CreateRemplacementLabel_dateDeRemplacement}" for="dateDeRemplacement" />
-                    <h:inputText id="dateDeRemplacement" value="#{remplacementController.selected.dateDeRemplacement}" title="#{bundle.CreateRemplacementTitle_dateDeRemplacement}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_dateDeRemplacement}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    <h:inputText id="dateDeRemplacement" value="#{remplacementController.selected.dateDeRemplacement}" title="#{bundle.CreateRemplacementTitle_dateDeRemplacement}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_dateDeRemplacement}" pt:placeholder="dd/MM/yyyy">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateRemplacementLabel_lienDeNomenclature}" for="lienDeNomenclature" />
-                    <h:selectOneMenu id="lienDeNomenclature" value="#{remplacementController.selected.lienDeNomenclature}" title="#{bundle.CreateRemplacementTitle_lienDeNomenclature}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_lienDeNomenclature}">
-                        <f:selectItems value="#{lienDeNomenclatureController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateRemplacementLabel_lienDeNomenclature1}" for="lienDeNomenclature1" />
-                    <h:selectOneMenu id="lienDeNomenclature1" value="#{remplacementController.selected.lienDeNomenclature1}" title="#{bundle.CreateRemplacementTitle_lienDeNomenclature1}" required="true" requiredMessage="#{bundle.CreateRemplacementRequiredMessage_lienDeNomenclature1}">
-                        <f:selectItems value="#{lienDeNomenclatureController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{remplacementController.create}" value="#{bundle.CreateRemplacementSaveLink}" />

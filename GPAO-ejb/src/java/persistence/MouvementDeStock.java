@@ -51,7 +51,7 @@ public class MouvementDeStock implements Serializable {
         this.mouvementDeStockPK = mouvementDeStockPK;
     }
 
-    public MouvementDeStock(String reference, Date periode, String type) {
+    public MouvementDeStock(String reference, Date periode, TypeMouvementStock type) {
         this.mouvementDeStockPK = new MouvementDeStockPK(reference, periode, type);
     }
 

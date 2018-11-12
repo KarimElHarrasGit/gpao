@@ -29,12 +29,12 @@
                     <h:selectOneMenu id="article" value="#{operationController.selected.article}" title="#{bundle.EditOperationTitle_article}" required="true" requiredMessage="#{bundle.EditOperationRequiredMessage_article}">
                         <f:selectItems value="#{articleController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditOperationLabel_posteDeCharge}" for="posteDeCharge" />
-                    <h:selectOneMenu id="posteDeCharge" value="#{operationController.selected.posteDeCharge}" title="#{bundle.EditOperationTitle_posteDeCharge}" >
+                    <h:outputLabel value="#{bundle.EditOperationLabel_mainDOeuvre}" for="mainDOeuvre" />
+                    <h:selectOneMenu id="mainDOeuvre" value="#{operationController.selected.mainDOeuvre}" title="#{bundle.EditOperationTitle_mainDOeuvre}" >
                         <f:selectItems value="#{posteDeChargeController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditOperationLabel_posteDeCharge1}" for="posteDeCharge1" />
-                    <h:selectOneMenu id="posteDeCharge1" value="#{operationController.selected.posteDeCharge1}" title="#{bundle.EditOperationTitle_posteDeCharge1}" >
+                    <h:outputLabel value="#{bundle.EditOperationLabel_machine}" for="machine" />
+                    <h:selectOneMenu id="machine" value="#{operationController.selected.machine}" title="#{bundle.EditOperationTitle_machine}" >
                         <f:selectItems value="#{posteDeChargeController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

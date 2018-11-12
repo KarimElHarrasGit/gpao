@@ -80,7 +80,7 @@ public class LienDeNomenclaturePK implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.LienDeNomenclaturePK[ compose=" + compose + ", composant=" + composant + " ]";
+        return "compose=" + compose + ", composant=" + composant;
     }
     
 }

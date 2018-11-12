@@ -22,23 +22,23 @@
                     <h:dataTable value="#{remplacementController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemplacementTitle_remplace}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.remplace}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRemplacementTitle_remplacant}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.remplacant}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRemplacementTitle_dateDeRemplacement}"/>
                             </f:facet>
                             <h:outputText value="#{item.dateDeRemplacement}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRemplacementTitle_lienDeNomenclature}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.lienDeNomenclature}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRemplacementTitle_lienDeNomenclature1}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.lienDeNomenclature1}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

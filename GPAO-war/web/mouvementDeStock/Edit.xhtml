@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -15,12 +16,15 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditMouvementDeStockLabel_mouvementDeStockPK_type}" for="mouvementDeStockPK_type" />
-                    <h:inputText id="mouvementDeStockPK_type" value="#{mouvementDeStockController.selected.mouvementDeStockPK.type}" title="#{bundle.EditMouvementDeStockTitle_mouvementDeStockPK_type}" required="true" requiredMessage="#{bundle.EditMouvementDeStockRequiredMessage_mouvementDeStockPK_type}"/>
                     <h:outputLabel value="#{bundle.EditMouvementDeStockLabel_mouvementDeStockPK_periode}" for="mouvementDeStockPK_periode" />
-                    <h:inputText id="mouvementDeStockPK_periode" value="#{mouvementDeStockController.selected.mouvementDeStockPK.periode}" title="#{bundle.EditMouvementDeStockTitle_mouvementDeStockPK_periode}" required="true" requiredMessage="#{bundle.EditMouvementDeStockRequiredMessage_mouvementDeStockPK_periode}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    <h:inputText id="mouvementDeStockPK_periode" value="#{mouvementDeStockController.selected.mouvementDeStockPK.periode}" title="#{bundle.EditMouvementDeStockTitle_mouvementDeStockPK_periode}" required="true" requiredMessage="#{bundle.EditMouvementDeStockRequiredMessage_mouvementDeStockPK_periode}" pt:placeholder="dd/MM/yyyy">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMouvementDeStockLabel_mouvementDeStockPK_type}" for="mouvementDeStockPK_type" />
+                    <h:selectOneMenu id="mouvementDeStockPK_type" value="#{mouvementDeStockController.selected.mouvementDeStockPK.type}" title="#{bundle.EditMouvementDeStockTitle_mouvementDeStockPK_type}">
+                        <f:selectItem itemValue="---" itemLabel="---" />
+                        <f:selectItems value="#{mouvementDeStockController.typeMouvementStock}" />
+                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditMouvementDeStockLabel_numeroMagasin}" for="numeroMagasin" />
                     <h:inputText id="numeroMagasin" value="#{mouvementDeStockController.selected.numeroMagasin}" title="#{bundle.EditMouvementDeStockTitle_numeroMagasin}" />
                     <h:outputLabel value="#{bundle.EditMouvementDeStockLabel_quantite}" for="quantite" />

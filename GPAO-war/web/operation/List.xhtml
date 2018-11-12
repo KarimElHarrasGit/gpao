@@ -28,6 +28,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOperationTitle_numeroPosteDeCharge}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mainDOeuvre.posteDeChargePK} #{item.machine.posteDeChargePK}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListOperationTitle_tempsPreparation}"/>
                             </f:facet>
                             <h:outputText value="#{item.tempsPreparation}"/>
@@ -49,24 +55,6 @@
                                 <h:outputText value="#{bundle.ListOperationTitle_libelleOperation}"/>
                             </f:facet>
                             <h:outputText value="#{item.libelleOperation}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListOperationTitle_article}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.article}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListOperationTitle_posteDeCharge}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.posteDeCharge}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListOperationTitle_posteDeCharge1}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.posteDeCharge1}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

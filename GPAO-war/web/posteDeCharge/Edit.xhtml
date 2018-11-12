@@ -15,12 +15,12 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditPosteDeChargeLabel_posteDeChargePK_estMachine}" for="posteDeChargePK_estMachine" />
-                    <h:inputText id="posteDeChargePK_estMachine" value="#{posteDeChargeController.selected.posteDeChargePK.estMachine}" title="#{bundle.EditPosteDeChargeTitle_posteDeChargePK_estMachine}" required="true" requiredMessage="#{bundle.EditPosteDeChargeRequiredMessage_posteDeChargePK_estMachine}"/>
                     <h:outputLabel value="#{bundle.EditPosteDeChargeLabel_posteDeChargePK_numeroSection}" for="posteDeChargePK_numeroSection" />
                     <h:inputText id="posteDeChargePK_numeroSection" value="#{posteDeChargeController.selected.posteDeChargePK.numeroSection}" title="#{bundle.EditPosteDeChargeTitle_posteDeChargePK_numeroSection}" required="true" requiredMessage="#{bundle.EditPosteDeChargeRequiredMessage_posteDeChargePK_numeroSection}"/>
                     <h:outputLabel value="#{bundle.EditPosteDeChargeLabel_posteDeChargePK_numeroSousSection}" for="posteDeChargePK_numeroSousSection" />
                     <h:inputText id="posteDeChargePK_numeroSousSection" value="#{posteDeChargeController.selected.posteDeChargePK.numeroSousSection}" title="#{bundle.EditPosteDeChargeTitle_posteDeChargePK_numeroSousSection}" required="true" requiredMessage="#{bundle.EditPosteDeChargeRequiredMessage_posteDeChargePK_numeroSousSection}"/>
+                    <h:outputLabel value="#{bundle.EditPosteDeChargeLabel_posteDeChargePK_estMachine}" for="posteDeChargePK_estMachine" />
+                    <h:selectBooleanCheckbox id="posteDeChargePK_estMachine" value="#{posteDeChargeController.selected.posteDeChargePK.estMachine}" title="#{bundle.EditPosteDeChargeTitle_posteDeChargePK_estMachine}"/>
                     <h:outputLabel value="#{bundle.EditPosteDeChargeLabel_designation}" for="designation" />
                     <h:inputText id="designation" value="#{posteDeChargeController.selected.designation}" title="#{bundle.EditPosteDeChargeTitle_designation}" required="true" requiredMessage="#{bundle.EditPosteDeChargeRequiredMessage_designation}"/>
                     <h:outputLabel value="#{bundle.EditPosteDeChargeLabel_tauxHoraireOuForfait}" for="tauxHoraireOuForfait" />
@@ -30,7 +30,10 @@
                     <h:outputLabel value="#{bundle.EditPosteDeChargeLabel_capaciteNominale}" for="capaciteNominale" />
                     <h:inputText id="capaciteNominale" value="#{posteDeChargeController.selected.capaciteNominale}" title="#{bundle.EditPosteDeChargeTitle_capaciteNominale}" required="true" requiredMessage="#{bundle.EditPosteDeChargeRequiredMessage_capaciteNominale}"/>
                     <h:outputLabel value="#{bundle.EditPosteDeChargeLabel_typeTauxHoraireOuForfait}" for="typeTauxHoraireOuForfait" />
-                    <h:inputText id="typeTauxHoraireOuForfait" value="#{posteDeChargeController.selected.typeTauxHoraireOuForfait}" title="#{bundle.EditPosteDeChargeTitle_typeTauxHoraireOuForfait}" required="true" requiredMessage="#{bundle.EditPosteDeChargeRequiredMessage_typeTauxHoraireOuForfait}"/>
+                    <h:selectOneMenu id="typeTauxHoraireOuForfait" value="#{posteDeChargeController.selected.typeTauxHoraireOuForfait}" title="#{bundle.EditPosteDeChargeTitle_typeTauxHoraireOuForfait}">
+                        <f:selectItem itemValue="---" itemLabel="---" />
+                        <f:selectItems value="#{posteDeChargeController.typeTauxHoraireOuForfait}" />
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{posteDeChargeController.update}" value="#{bundle.EditPosteDeChargeSaveLink}"/>
                 <br />

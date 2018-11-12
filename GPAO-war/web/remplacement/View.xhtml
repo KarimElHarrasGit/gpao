@@ -15,14 +15,14 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewRemplacementLabel_remplace}"/>
+                    <h:outputText value="#{remplacementController.selected.remplace}" title="#{bundle.ViewRemplacementTitle_remplace}"/>
+                    <h:outputText value="#{bundle.ViewRemplacementLabel_remplacant}"/>
+                    <h:outputText value="#{remplacementController.selected.remplacant}" title="#{bundle.ViewRemplacementTitle_remplacant}"/>
                     <h:outputText value="#{bundle.ViewRemplacementLabel_dateDeRemplacement}"/>
                     <h:outputText value="#{remplacementController.selected.dateDeRemplacement}" title="#{bundle.ViewRemplacementTitle_dateDeRemplacement}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
-                    <h:outputText value="#{bundle.ViewRemplacementLabel_lienDeNomenclature}"/>
-                    <h:outputText value="#{remplacementController.selected.lienDeNomenclature}" title="#{bundle.ViewRemplacementTitle_lienDeNomenclature}"/>
-                    <h:outputText value="#{bundle.ViewRemplacementLabel_lienDeNomenclature1}"/>
-                    <h:outputText value="#{remplacementController.selected.lienDeNomenclature1}" title="#{bundle.ViewRemplacementTitle_lienDeNomenclature1}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{remplacementController.destroyAndView}" value="#{bundle.ViewRemplacementDestroyLink}"/>

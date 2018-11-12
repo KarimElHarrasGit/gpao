@@ -16,6 +16,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import service.ManageOperation;
 
 @Named("operationController")
 @SessionScoped
@@ -24,7 +25,7 @@ public class OperationController implements Serializable {
     private Operation current;
     private DataModel items = null;
     @EJB
-    private presentation.OperationFacade ejbFacade;
+    private ManageOperation manageOperation;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,22 +41,18 @@ public class OperationController implements Serializable {
         return current;
     }
 
-    private OperationFacade getFacade() {
-        return ejbFacade;
-    }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
                 @Override
                 public int getItemsCount() {
-                    return getFacade().count();
+                    return manageOperation.count();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(manageOperation.findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -83,7 +80,7 @@ public class OperationController implements Serializable {
     public String create() {
         try {
             current.getOperationPK().setGammeDeFabrication(current.getArticle().getReference());
-            getFacade().create(current);
+            manageOperation.create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("OperationCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -101,7 +98,7 @@ public class OperationController implements Serializable {
     public String update() {
         try {
             current.getOperationPK().setGammeDeFabrication(current.getArticle().getReference());
-            getFacade().edit(current);
+            manageOperation.edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("OperationUpdated"));
             return "View";
         } catch (Exception e) {
@@ -134,7 +131,7 @@ public class OperationController implements Serializable {
 
     private void performDestroy() {
         try {
-            getFacade().remove(current);
+            manageOperation.remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("OperationDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/presentation/Bundle").getString("PersistenceErrorOccured"));
@@ -142,7 +139,7 @@ public class OperationController implements Serializable {
     }
 
     private void updateCurrentItem() {
-        int count = getFacade().count();
+        int count = manageOperation.count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -152,7 +149,7 @@ public class OperationController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = manageOperation.findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -184,15 +181,15 @@ public class OperationController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(manageOperation.findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(manageOperation.findAll(), true);
     }
 
     public Operation getOperation(persistence.OperationPK id) {
-        return ejbFacade.find(id);
+        return manageOperation.find(id);
     }
 
     @FacesConverter(forClass = Operation.class)

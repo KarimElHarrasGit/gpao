@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -34,14 +36,14 @@ public class MouvementDeStockPK implements Serializable {
     private Date periode;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 6)
-    @Column(name = "TYPE")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TYPE", length = 6)
+    private TypeMouvementStock type;
 
     public MouvementDeStockPK() {
     }
 
-    public MouvementDeStockPK(String reference, Date periode, String type) {
+    public MouvementDeStockPK(String reference, Date periode, TypeMouvementStock type) {
         this.reference = reference;
         this.periode = periode;
         this.type = type;
@@ -63,13 +65,15 @@ public class MouvementDeStockPK implements Serializable {
         this.periode = periode;
     }
 
-    public String getType() {
+    public TypeMouvementStock getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypeMouvementStock type) {
         this.type = type;
     }
+
+    
 
     @Override
     public int hashCode() {

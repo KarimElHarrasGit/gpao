@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -83,9 +85,9 @@ public class Article implements Serializable {
     private Double pourcentageDePerte;
     @Column(name = "INVENTAIRE")
     private Integer inventaire;
-    @Size(max = 2)
-    @Column(name = "PF_OU_MP_OU_PIECE_OU_SE")
-    private String pfOuMpOuPieceOuSe;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PF_OU_MP_OU_PIECE_OU_SE", length = 2)
+    private TypeArticle pfOuMpOuPieceOuSe;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "article")
     private Collection<MouvementDeStock> mouvementDeStockCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "article")
@@ -198,11 +200,11 @@ public class Article implements Serializable {
         this.inventaire = inventaire;
     }
 
-    public String getPfOuMpOuPieceOuSe() {
+    public TypeArticle getPfOuMpOuPieceOuSe() {
         return pfOuMpOuPieceOuSe;
     }
 
-    public void setPfOuMpOuPieceOuSe(String pfOuMpOuPieceOuSe) {
+    public void setPfOuMpOuPieceOuSe(TypeArticle pfOuMpOuPieceOuSe) {
         this.pfOuMpOuPieceOuSe = pfOuMpOuPieceOuSe;
     }
 
@@ -242,8 +244,6 @@ public class Article implements Serializable {
         this.lienDeNomenclatureCollectionCompose = lienDeNomenclatureCollectionCompose;
     }
 
-    
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -268,5 +268,5 @@ public class Article implements Serializable {
     public String toString() {
         return reference;
     }
-    
+
 }

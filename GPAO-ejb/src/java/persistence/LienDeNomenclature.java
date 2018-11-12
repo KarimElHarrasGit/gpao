@@ -43,16 +43,16 @@ public class LienDeNomenclature implements Serializable {
     @NotNull
     @Column(name = "QUANTITE_DE_COMPOSITION")
     private double quantiteDeComposition;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lienDeNomenclature")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "remplacant")
     private Collection<Remplacement> remplacementCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lienDeNomenclature1")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "remplace")
     private Collection<Remplacement> remplacementCollection1;
-    @JoinColumn(name = "COMPOSANT", referencedColumnName = "REFERENCE", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Article composant;
     @JoinColumn(name = "COMPOSE", referencedColumnName = "REFERENCE", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Article compose;
+    @JoinColumn(name = "COMPOSANT", referencedColumnName = "REFERENCE", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Article composant;
 
     public LienDeNomenclature() {
     }
@@ -78,14 +78,6 @@ public class LienDeNomenclature implements Serializable {
         this.lienDeNomenclaturePK = lienDeNomenclaturePK;
     }
 
-    public double getQuantiteDeComposition() {
-        return quantiteDeComposition;
-    }
-
-    public void setQuantiteDeComposition(double quantiteDeComposition) {
-        this.quantiteDeComposition = quantiteDeComposition;
-    }
-
     @XmlTransient
     public Collection<Remplacement> getRemplacementCollection() {
         return remplacementCollection;
@@ -104,14 +96,6 @@ public class LienDeNomenclature implements Serializable {
         this.remplacementCollection1 = remplacementCollection1;
     }
 
-    public Article getComposant() {
-        return composant;
-    }
-
-    public void setComposant(Article composant) {
-        this.composant = composant;
-    }
-
     public Article getCompose() {
         return compose;
     }
@@ -120,7 +104,21 @@ public class LienDeNomenclature implements Serializable {
         this.compose = compose;
     }
 
-    
+    public Article getComposant() {
+        return composant;
+    }
+
+    public void setComposant(Article composant) {
+        this.composant = composant;
+    }
+
+    public double getQuantiteDeComposition() {
+        return quantiteDeComposition;
+    }
+
+    public void setQuantiteDeComposition(double quantiteDeComposition) {
+        this.quantiteDeComposition = quantiteDeComposition;
+    }
 
     @Override
     public int hashCode() {
@@ -144,7 +142,7 @@ public class LienDeNomenclature implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.LienDeNomenclature[ lienDeNomenclaturePK=" + lienDeNomenclaturePK + " ]";
+        return lienDeNomenclaturePK.toString();
     }
-    
+
 }

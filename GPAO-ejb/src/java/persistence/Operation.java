@@ -61,13 +61,13 @@ public class Operation implements Serializable {
         , @JoinColumn(name = "MAIN_D_OEUVRE_NUMERO_SOUS_SECTION", referencedColumnName = "NUMERO_SOUS_SECTION")
         , @JoinColumn(name = "MAIN_D_OEUVRE_EST_MACHINE", referencedColumnName = "EST_MACHINE")})
     @ManyToOne
-    private PosteDeCharge posteDeCharge;
+    private PosteDeCharge mainDOeuvre;
     @JoinColumns({
         @JoinColumn(name = "MACHINE_NUMERO_SECTION", referencedColumnName = "NUMERO_SECTION")
         , @JoinColumn(name = "MACHINE_NUMERO_SOUS_SECTION", referencedColumnName = "NUMERO_SOUS_SECTION")
         , @JoinColumn(name = "MACHINE_EST_MACHINE", referencedColumnName = "EST_MACHINE")})
     @ManyToOne
-    private PosteDeCharge posteDeCharge1;
+    private PosteDeCharge machine;
 
     public Operation() {
     }
@@ -134,20 +134,20 @@ public class Operation implements Serializable {
         this.article = article;
     }
 
-    public PosteDeCharge getPosteDeCharge() {
-        return posteDeCharge;
+    public PosteDeCharge getMainDOeuvre() {
+        return mainDOeuvre;
     }
 
-    public void setPosteDeCharge(PosteDeCharge posteDeCharge) {
-        this.posteDeCharge = posteDeCharge;
+    public void setMainDOeuvre(PosteDeCharge mainDOeuvre) {
+        this.mainDOeuvre = mainDOeuvre;
     }
 
-    public PosteDeCharge getPosteDeCharge1() {
-        return posteDeCharge1;
+    public PosteDeCharge getMachine() {
+        return machine;
     }
 
-    public void setPosteDeCharge1(PosteDeCharge posteDeCharge1) {
-        this.posteDeCharge1 = posteDeCharge1;
+    public void setMachine(PosteDeCharge machine) {
+        this.machine = machine;
     }
 
     @Override

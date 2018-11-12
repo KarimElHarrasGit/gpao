@@ -16,6 +16,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import persistence.TypeMouvementStock;
+import service.ManageMouvementDeStock;
 
 @Named("mouvementDeStockController")
 @SessionScoped
@@ -24,7 +26,7 @@ public class MouvementDeStockController implements Serializable {
     private MouvementDeStock current;
     private DataModel items = null;
     @EJB
-    private presentation.MouvementDeStockFacade ejbFacade;
+    private ManageMouvementDeStock manageMouvementDeStock;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,22 +42,18 @@ public class MouvementDeStockController implements Serializable {
         return current;
     }
 
-    private MouvementDeStockFacade getFacade() {
-        return ejbFacade;
-    }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
                 @Override
                 public int getItemsCount() {
-                    return getFacade().count();
+                    return manageMouvementDeStock.count();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(manageMouvementDeStock.findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -83,7 +81,7 @@ public class MouvementDeStockController implements Serializable {
     public String create() {
         try {
             current.getMouvementDeStockPK().setReference(current.getArticle().getReference());
-            getFacade().create(current);
+            manageMouvementDeStock.create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("MouvementDeStockCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -101,7 +99,7 @@ public class MouvementDeStockController implements Serializable {
     public String update() {
         try {
             current.getMouvementDeStockPK().setReference(current.getArticle().getReference());
-            getFacade().edit(current);
+            manageMouvementDeStock.edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("MouvementDeStockUpdated"));
             return "View";
         } catch (Exception e) {
@@ -134,7 +132,7 @@ public class MouvementDeStockController implements Serializable {
 
     private void performDestroy() {
         try {
-            getFacade().remove(current);
+            manageMouvementDeStock.remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("MouvementDeStockDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/presentation/Bundle").getString("PersistenceErrorOccured"));
@@ -142,7 +140,7 @@ public class MouvementDeStockController implements Serializable {
     }
 
     private void updateCurrentItem() {
-        int count = getFacade().count();
+        int count = manageMouvementDeStock.count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -152,7 +150,7 @@ public class MouvementDeStockController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = manageMouvementDeStock.findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -184,15 +182,15 @@ public class MouvementDeStockController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(manageMouvementDeStock.findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(manageMouvementDeStock.findAll(), true);
     }
 
     public MouvementDeStock getMouvementDeStock(persistence.MouvementDeStockPK id) {
-        return ejbFacade.find(id);
+        return manageMouvementDeStock.find(id);
     }
 
     @FacesConverter(forClass = MouvementDeStock.class)
@@ -217,7 +215,7 @@ public class MouvementDeStockController implements Serializable {
             key = new persistence.MouvementDeStockPK();
             key.setReference(values[0]);
             key.setPeriode(java.sql.Date.valueOf(values[1]));
-            key.setType(values[2]);
+            key.setType(TypeMouvementStock.valueOf(values[2]));
             return key;
         }
 
@@ -246,4 +244,7 @@ public class MouvementDeStockController implements Serializable {
 
     }
 
+    public TypeMouvementStock[] getTypeMouvementStock() {
+        return TypeMouvementStock.values();
+    }
 }

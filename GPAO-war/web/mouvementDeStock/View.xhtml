@@ -15,12 +15,12 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewMouvementDeStockLabel_mouvementDeStockPK_type}"/>
-                    <h:outputText value="#{mouvementDeStockController.selected.mouvementDeStockPK.type}" title="#{bundle.ViewMouvementDeStockTitle_mouvementDeStockPK_type}"/>
                     <h:outputText value="#{bundle.ViewMouvementDeStockLabel_mouvementDeStockPK_periode}"/>
                     <h:outputText value="#{mouvementDeStockController.selected.mouvementDeStockPK.periode}" title="#{bundle.ViewMouvementDeStockTitle_mouvementDeStockPK_periode}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
+                    <h:outputText value="#{bundle.ViewMouvementDeStockLabel_mouvementDeStockPK_type}"/>
+                    <h:outputText value="#{mouvementDeStockController.selected.mouvementDeStockPK.type}" title="#{bundle.ViewMouvementDeStockTitle_mouvementDeStockPK_type}"/>
                     <h:outputText value="#{bundle.ViewMouvementDeStockLabel_numeroMagasin}"/>
                     <h:outputText value="#{mouvementDeStockController.selected.numeroMagasin}" title="#{bundle.ViewMouvementDeStockTitle_numeroMagasin}"/>
                     <h:outputText value="#{bundle.ViewMouvementDeStockLabel_quantite}"/>

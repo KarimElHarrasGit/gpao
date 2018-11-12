@@ -16,6 +16,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
+import persistence.TypeArticle;
 import service.ManageArticle;
 
 @Named("articleController")
@@ -39,8 +40,6 @@ public class ArticleController implements Serializable {
         }
         return current;
     }
-
-    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -230,4 +229,7 @@ public class ArticleController implements Serializable {
 
     }
 
+    public TypeArticle[] getTypeArticle() {
+        return TypeArticle.values();
+    }
 }

@@ -16,6 +16,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import persistence.TypeTauxHoraireOuForfait;
+import service.ManagePosteDeCharge;
 
 @Named("posteDeChargeController")
 @SessionScoped
@@ -24,7 +26,7 @@ public class PosteDeChargeController implements Serializable {
     private PosteDeCharge current;
     private DataModel items = null;
     @EJB
-    private presentation.PosteDeChargeFacade ejbFacade;
+    private ManagePosteDeCharge managePosteDeCharge;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -40,22 +42,18 @@ public class PosteDeChargeController implements Serializable {
         return current;
     }
 
-    private PosteDeChargeFacade getFacade() {
-        return ejbFacade;
-    }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
 
                 @Override
                 public int getItemsCount() {
-                    return getFacade().count();
+                    return managePosteDeCharge.count();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(managePosteDeCharge.findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
         }
@@ -82,7 +80,7 @@ public class PosteDeChargeController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
+            managePosteDeCharge.create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("PosteDeChargeCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -99,7 +97,7 @@ public class PosteDeChargeController implements Serializable {
 
     public String update() {
         try {
-            getFacade().edit(current);
+            managePosteDeCharge.edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("PosteDeChargeUpdated"));
             return "View";
         } catch (Exception e) {
@@ -132,7 +130,7 @@ public class PosteDeChargeController implements Serializable {
 
     private void performDestroy() {
         try {
-            getFacade().remove(current);
+            managePosteDeCharge.remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/presentation/Bundle").getString("PosteDeChargeDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/presentation/Bundle").getString("PersistenceErrorOccured"));
@@ -140,7 +138,7 @@ public class PosteDeChargeController implements Serializable {
     }
 
     private void updateCurrentItem() {
-        int count = getFacade().count();
+        int count = managePosteDeCharge.count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -150,7 +148,7 @@ public class PosteDeChargeController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = managePosteDeCharge.findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
@@ -182,15 +180,15 @@ public class PosteDeChargeController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(managePosteDeCharge.findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(managePosteDeCharge.findAll(), true);
     }
 
     public PosteDeCharge getPosteDeCharge(persistence.PosteDeChargePK id) {
-        return ejbFacade.find(id);
+        return managePosteDeCharge.find(id);
     }
 
     @FacesConverter(forClass = PosteDeCharge.class)
@@ -215,7 +213,7 @@ public class PosteDeChargeController implements Serializable {
             key = new persistence.PosteDeChargePK();
             key.setNumeroSection(Integer.parseInt(values[0]));
             key.setNumeroSousSection(Integer.parseInt(values[1]));
-            key.setEstMachine(Short.parseShort(values[2]));
+            key.setEstMachine(Boolean.parseBoolean(values[2]));
             return key;
         }
 
@@ -225,7 +223,7 @@ public class PosteDeChargeController implements Serializable {
             sb.append(SEPARATOR);
             sb.append(value.getNumeroSousSection());
             sb.append(SEPARATOR);
-            sb.append(value.getEstMachine());
+            sb.append(value.isEstMachine());
             return sb.toString();
         }
 
@@ -244,4 +242,7 @@ public class PosteDeChargeController implements Serializable {
 
     }
 
+    public TypeTauxHoraireOuForfait[] getTypeTauxHoraireOuForfait() {
+        return TypeTauxHoraireOuForfait.values();
+    }
 }
